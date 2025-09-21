@@ -1,0 +1,309 @@
+/* =========================================================
+   COMPONENTS.CSS — UI del Quiz
+   - Card, formularios, botones genéricos (.btn)
+   - Burbujas de navegación (1..10) con layout responsive
+   - Opciones con estados + badge (✅/❌)
+   - Barra de Progreso centrada y adaptable
+   - Extras Results + (Intro opcional)
+   ---------------------------------------------------------
+   
+   ========================================================= */
+
+/* ===== Card y contenedores ===== */
+.card{
+background: var(--card);
+border-radius: var(--radius);
+padding: 32px;
+box-shadow: var(--shadow-1);
+}
+.intro{ /* Puedes eliminar si no usas Intro */
+display: grid;
+place-items: center;
+min-height: calc(100vh - 120px);
+}
+.quiz-wrap{
+max-width: 980px;
+margin: 0 auto;
+padding: 24px;
+}
+.quiz-card{
+margin: 24px auto;
+padding: 40px 36px;
+max-width: 880px; /* Mantén coordinado con layout del contenedor */
+}
+.results{
+display: grid;
+place-items: center;
+min-height: calc(100vh - 120px);
+}
+.results-card{
+text-align: center;
+max-width: 560px;
+}
+
+
+/* ===== Form ===== */
+.label{
+display: grid;
+gap: 6px;
+margin: 10px 0 16px;
+}
+.label-text{
+font-size: 13px;
+font-weight: 600;
+color: var(--muted);
+}
+.input{
+border: 1px solid #3b3f6f;
+border-radius: var(--radius);
+padding: 12px 14px;
+background: #1f2449;
+color: var(--text);
+transition: border-color .12s ease;
+}
+.input:focus{
+outline: none;
+border-color: #8f95ff;
+}
+
+
+/* ===== Botones genéricos (se usan en Results) ===== */
+.btn{
+display: inline-block;
+border: none;
+cursor: pointer;
+padding: 12px 18px;
+color: #fff;
+background: var(--grad);
+border-radius: 12px;
+font-weight: 600;
+font-size: 16px;
+transition: transform .12s ease, filter .12s ease;
+}
+.btn:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+.btn:active{ transform: translateY(0); }
+.btn:disabled{ opacity: .6; cursor: not-allowed; }
+
+
+/* ===== Pill de puntaje ===== */
+.score-pill{
+background: var(--grad);
+color: #fff;
+padding: 8px 14px;
+border-radius: 999px;
+font-size: 14px;
+font-weight: 600;
+box-shadow: var(--shadow-2);
+}
+
+
+/* ===== Burbujas originales ===== */
+.bubbles {
+display: flex;
+flex-wrap: wrap; /* permite que bajen de línea en pantallas pequeñas */
+justify-content: center; /* centradas */
+gap: 12px;
+margin-bottom: 22px;
+}
+
+.bubble {
+width: 40px;
+height: 40px;
+border-radius: 50%;
+display: grid;
+place-items: center;
+background: var(--opt); /* color neutro */
+color: #fff;
+font-size: 14px;
+font-weight: 600;
+cursor: pointer;
+transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+border: #1f2449;
+}
+
+.bubble:hover {
+transform: translateY(-2px);
+opacity: 1;
+}
+
+.bubble.active {
+background: var(--grad); /* gradiente activo */
+font-weight: 700;
+box-shadow: var(--shadow-2); /* sombra para resaltar */
+transform: translateY(-2px);
+border: #1f2449;
+}
+
+/* Responsive: en pantallas muy chicas se achican */
+@media (max-width: 480px) {
+.bubble {
+width: 32px;
+height: 32px;
+font-size: 12px;
+}
+}
+
+
+/* ===== Opciones ===== */
+.options{
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 18px;
+margin-top: 10px;
+}
+@media (max-width: 768px){
+.options{ grid-template-columns: 1fr; }
+}
+.option{
+background: var(--opt);
+border-radius: 16px;
+padding: 18px 20px;
+border: 2px solid transparent;
+cursor: pointer;
+text-align: center;
+color: var(--text);
+font-weight: 600;
+transition:
+transform .08s ease,
+background .12s ease,
+border-color .12s ease,
+box-shadow .12s ease,
+filter .12s ease;
+box-shadow: none;
+}
+.option:hover{ background: var(--opt-hover); transform: translateY(-1px); }
+.option.selected{ background: var(--grad); color: #fff; box-shadow: var(--shadow-2); }
+.option.correct{ border-color: var(--success); }
+.option.wrong{ border-color: var(--error); }
+.option:disabled{ opacity: .8; cursor: not-allowed; }
+
+/* ===== Badge de feedback (✅ / ❌) para opciones =====
+- Se muestra cuando el estado es .correct o .wrong
+- Usar junto con OptionItem.jsx que inserta <span class="option__badge"><img .../></span>
+*/
+.option{
+position: relative;
+display: flex; /* etiqueta y badge en el mismo eje */
+justify-content: center;
+align-items: center;
+padding-right: 56px; /* espacio para el badge a la derecha */
+}
+.option__label{ pointer-events: none; }
+
+/* Si prefieres SOLO iconos, sin color de borde: descomenta esto*/
+.option.correct,
+.option.wrong{ border-color: transparent; }
+
+/* Badge circular (contenedor del SVG) */
+.option__badge{
+position: absolute;
+right: 16px;
+width: 28px; height: 28px;
+border-radius: 50%;
+display: grid; place-items: center;
+/* Puedes añadir sombra/fondo si quieres más contraste:
+box-shadow: var(--shadow-2);
+background: rgba(0,0,0,.25);
+border: 2px solid rgba(255,255,255,.35);
+*/
+}
+.option__badge img{
+width: 16px; height: 16px; display: block;
+}
+
+/* Ajuste móvil para que no tape el texto */
+@media (max-width: 420px){
+.option{ padding-right: 48px; }
+.option__badge{ right: 12px; width: 26px; height: 26px; }
+.option__badge img{ width: 15px; height: 15px; }
+}
+
+/* Mantener el gradiente morado cuando está seleccionada */
+.option.selected{
+background: var(--grad);
+color:#fff;
+box-shadow: var(--shadow-2);
+}
+
+/* Si además es correcta/incorrecta, solo borde cambia;
+el fondo morado se conserva */
+.option.correct.selected{ border-color: var(--success); }
+.option.wrong.selected{ border-color: var(--error); }
+
+/* Evitar que el :disabled atenúe la opción seleccionada */
+.option.selected:disabled{ opacity: 1; }
+
+.option:disabled{ opacity:.8; cursor:not-allowed; }
+
+/* ===== Progreso (centrado y adaptable) ===== */
+.quiz-toprow{
+display: grid;
+grid-template-columns: 1fr;
+gap: 12px;
+margin: 12px 0 24px;
+justify-items: center;
+}
+@media (min-width: 600px){
+.quiz-toprow{ grid-template-columns: 1fr minmax(240px, 520px) 1fr; }
+}
+.progress{
+width: 100%;
+max-width: 520px;
+height: 8px;
+background: #2f3464;
+border-radius: 999px;
+overflow: hidden;
+margin-inline: auto; /* centrada */
+}
+.progress-fill{ height: 100%; background: var(--grad); }
+
+/* ===== Result hero ===== */
+.result-hero{
+width: 72px; height: 72px;
+border-radius: 50%;
+background: #FFECC8;
+display: grid; place-items: center;
+margin: 0 auto 12px;
+font-size: 32px;
+}
+
+/* ===== Intro (opcional) ===== */
+.intro .card{
+max-width: 560px;
+padding: 36px 32px;
+border-radius: 18px;
+}
+.intro .btn{
+display: block;
+margin: 0 auto;
+}
+
+/* ===== Footer ===== */
+.footer .container{
+display: flex;
+justify-content: center;
+align-items: center;
+}
+
+/* Foco claro en controles clave */
+.option:focus-visible,
+.bubble:focus-visible,
+.btn:focus-visible,
+.brand:focus-visible{
+outline: 3px solid rgba(143,149,255,.6);
+outline-offset: 2px;
+border-radius: 12px;
+}
+/* Paridad hover/teclado */
+.option:focus-visible{ transform: translateY(-1px); background: var(--opt-hover); }
+.bubble:focus-visible{ transform: translateY(-2px); }
+
+@media (prefers-contrast: more){
+.option.selected{ box-shadow: 0 0 0 3px rgba(255,255,255,.25); }
+.progress{ background:#1f2242; }
+}
+
+@media print{
+body{ background: white !important; }
+.card{ box-shadow: none !important; }
+}

@@ -258,14 +258,20 @@ margin-inline: auto; /* centrada */
 .progress-fill{ height: 100%; background: var(--grad); }
 
 /* ===== Result hero ===== */
+/* ===== Result hero (imagen completa) ===== */
 .result-hero{
-width: 72px; height: 72px;
-border-radius: 50%;
-background: #FFECC8;
-display: grid; place-items: center;
-margin: 0 auto 12px;
-font-size: 32px;
+  width: min(100%, 520px);
+  margin: 0 auto 16px;
 }
+
+.result-hero-img{
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 16px;          /* se ve redondeado como la card */
+  box-shadow: var(--shadow-2);  /* coherente con el resto del UI */
+}
+
 
 /* ===== Intro (opcional) ===== */
 .intro .card{
@@ -306,4 +312,18 @@ border-radius: 12px;
 @media print{
 body{ background: white !important; }
 .card{ box-shadow: none !important; }
+}
+
+.bubble.answered {
+  background: linear-gradient(#E65895, #BC6BE8); /* un color distinto al neutro */
+  opacity: 0.9;
+}
+.bubble.active.answered {
+  background: var(--grad); /* mantiene gradiente si es la actual */
+}
+
+.option__badge img {
+  width: 16px;
+  height: 16px;
+  display: block;
 }

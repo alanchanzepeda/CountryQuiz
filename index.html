@@ -1,77 +1,106 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <!-- SEO Básico -->
-  <title>World Quiz 🌍 | Juego Interactivo de Países, Banderas y Capitales</title>
-  <meta name="description" content="Pon a prueba tus conocimientos de geografía con World Quiz. Adivina banderas, capitales y regiones del mundo en un divertido juego educativo." />
-  <meta name="keywords" content="world quiz, geografía, juego educativo, banderas, capitales, países, trivias, aprendizaje" />
-  <meta name="author" content="World Quiz Team" />
-  <meta name="robots" content="index, follow" />
-  <meta name="geo.region" content="MX" />
-  <meta name="geo.placename" content="México" />
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Open Graph / WhatsApp / Facebook -->
-  <meta property="og:title" content="World Quiz 🌍 | Juego Interactivo de Países, Banderas y Capitales" />
-  <meta property="og:description" content="Pon a prueba tus conocimientos de geografía adivinando banderas, capitales y países. ¡Demuestra que eres un experto en el mundo!" />
-  <meta property="og:image" content="https://country-quiz-pink.vercel.app/og.png?v=5" />
-  <meta property="og:url" content="https://country-quiz-pink.vercel.app/quiz" />
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="es_MX" />
+    <!-- =====================  Título + Descripción  ===================== -->
+    <title>Country Quiz — Aprende países con preguntas rápidas</title>
+    <meta name="description" content="Country Quiz: responde 10 preguntas sobre países usando la API de Rest Countries. 4 opciones por pregunta, feedback inmediato, navegación entre preguntas y página de resultados con opción de jugar de nuevo." />
+    <link rel="canonical" href="https://country-quiz-ecru-ten.vercel.app/" />
 
-  <!-- Favicon e Iconos (en raíz) -->
-  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  <link rel="shortcut icon" href="/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-  <link rel="manifest" href="/site.webmanifest" />
+    <!-- =====================  Indexación  ===================== -->
+    <meta name="robots" content="index,follow,max-image-preview:large" />
+    <meta name="googlebot" content="index,follow" />
+    <meta name="bingbot" content="index,follow" />
+    <link rel="alternate" hreflang="es-MX" href="https://country-quiz-ecru-ten.vercel.app/" />
+    <link rel="alternate" hreflang="x-default" href="https://country-quiz-ecru-ten.vercel.app/" />
 
-  <!-- Iconos adicionales PWA -->
-  <link rel="icon" type="image/png" sizes="192x192" href="/web-app-manifest-192x192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="/web-app-manifest-512x512.png" />
+    <!-- =====================  Metadatos generales  ===================== -->
+    <meta name="application-name" content="Country Quiz" />
+    <meta name="author" content="Alan Chan Zepeda" />
+    <meta name="generator" content="Vite + React" />
+    <meta name="theme-color" content="#343964" />
+    <meta name="color-scheme" content="dark light" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="HandheldFriendly" content="true" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-TileColor" content="#343964" />
 
-  <!-- Twitter Card -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://country-quiz-pink.vercel.app/quiz">
-  <meta property="twitter:title" content="World Quiz 🌍">
-  <meta property="twitter:description" content="Pon a prueba tu conocimiento en geografía con banderas, capitales y regiones del mundo.">
-  <meta property="twitter:image" content="https://country-quiz-pink.vercel.app/og.png?v=5">
+    <!-- =====================  Open Graph / WhatsApp / Discord  ===================== -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Country Quiz" />
+    <meta property="og:title" content="Country Quiz — Aprende países con preguntas rápidas" />
+    <meta property="og:description" content="Juega 10 preguntas generadas con la API de países. 4 opciones, respuesta correcta inmediata, navegación y pantalla de resultados." />
+    <meta property="og:url" content="https://country-quiz-ecru-ten.vercel.app/" />
 
-  <!-- Theme / PWA -->
-  <meta name="theme-color" content="#393F6E">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+    <meta property="og:image" content="https://country-quiz-ecru-ten.vercel.app/og/social-preview.jpg?v=2" />
+    <meta property="og:image:secure_url" content="https://country-quiz-ecru-ten.vercel.app/og/social-preview.jpg?v=2" />
+    <meta property="og:image:alt" content="Pantalla de Country Quiz" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="es_MX" />
 
-  <!-- Schema.org para SEO -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebApplication",
-    "name": "World Quiz",
-    "url": "https://country-quiz-pink.vercel.app/quiz",
-    "image": "https://country-quiz-pink.vercel.app/og.png",
-    "author": {
-      "@type": "Organization",
-      "name": "World Quiz Team"
-    },
-    "applicationCategory": "EducationalApplication",
-    "operatingSystem": "Web",
-    "description": "Juego interactivo para aprender geografía a través de preguntas sobre países, banderas y capitales."
-  }
-  </script>
+    <!-- =====================  Twitter Cards  ===================== -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Country Quiz — Aprende países con preguntas rápidas" />
+    <meta name="twitter:description" content="10 preguntas de países con 4 opciones, feedback al instante y página de resultados. ¡Juega ahora!" />
+    <meta name="twitter:image" content="https://country-quiz-ecru-ten.vercel.app/og/social-preview.jpg?v=2" />
+    <meta name="twitter:domain" content="country-quiz-ecru-ten.vercel.app" />
 
-  <!-- Fuentes y estilos -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&display=swap" rel="stylesheet">
-</head>
+    <!-- =====================  Favicons / PWA (todos en /public)  ===================== -->
+    <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-<body>
-  <div id="root"></div>
-  <script type="module" src="/src/main.jsx"></script>
-</body>
+    <!-- =====================  Rendimiento  ===================== -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://restcountries.com" />
+    <link rel="preconnect" href="https://restcountries.com" />
+
+    <!-- =====================  JSON-LD (schema.org)  ===================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Country Quiz",
+        "url": "https://country-quiz-ecru-ten.vercel.app/",
+        "applicationCategory": "EducationalApplication",
+        "operatingSystem": "Web",
+        "inLanguage": "es",
+        "description": "Quiz de países con 10 preguntas generadas desde la API de Rest Countries. 4 opciones por pregunta, feedback inmediato, navegación libre y página de resultados con opción de jugar de nuevo.",
+        "author": { "@type": "Person", "name": "Alan Chan Zepeda" },
+        "publisher": { "@type": "Organization", "name": "Country Quiz Project" },
+        "image": "https://country-quiz-ecru-ten.vercel.app/og/social-preview.jpg?v=2",
+        "screenshot": "https://country-quiz-ecru-ten.vercel.app/og/social-preview.jpg?v=2",
+        "softwareHelp": "https://github.com/alanchanzepeda/CountryQuiz",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "featureList": [
+          "10 preguntas por ronda",
+          "4 opciones por pregunta",
+          "Feedback inmediato al seleccionar respuesta",
+          "Navegación entre preguntas",
+          "Pantalla de resultados con puntuación",
+          "Reintentar partida"
+        ],
+        "potentialAction": {
+          "@type": "PlayAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://country-quiz-ecru-ten.vercel.app/quiz"
+          }
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
-

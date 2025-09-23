@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://country-quiz-ecru-ten.vercel.app/sitemap.xml
